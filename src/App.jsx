@@ -1,3 +1,4 @@
+import { useState } from "react"
 
 function App() {
   return <div>
@@ -8,21 +9,30 @@ function App() {
 }
 
 function LightBulb() {
+  const [bulbOn, setBulbOn] = useState(true)
+
   return <div>
-    <BulbState />
-    <ToggleBulbState />
+    <BulbState bulbOn={bulbOn} />
+    <ToggleBulbState bulbOn={bulbOn} setBulbOn={setBulbOn} />
   </div>
 }
 
-function BulbState() {
+function BulbState({ bulbOn }) {
   return <div>
-
+    {bulbOn ? "bulbOn" : "bulbOff"}
   </div>
 }
 
-function ToggleBulbState() {
+function ToggleBulbState({ bulbOn, setBulbOn }) {
+
+  function toggle() {
+    // setBulbOn(currentState => !currentState)
+    setBulbOn(!bulbOn)
+
+  }
+
   return <div>
-    <button>Toggle the bulb</button>
+    <button onClick={toggle}>Toggle the bulb</button>
   </div>
 }
 export default App
